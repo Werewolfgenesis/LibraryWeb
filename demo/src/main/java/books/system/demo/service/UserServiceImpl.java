@@ -2,86 +2,60 @@ package books.system.demo.service;
 
 import books.system.demo.model.Book;
 import books.system.demo.model.BookCollection;
-import books.system.demo.model.User;
+import books.system.demo.repository.UserRepo;
+import books.system.demo.repository.UserRepoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class UserServiceImpl implements UserService{
-    //all books
-    private BookCollection books = new BookCollection();
-    //current user
-    private User user =  new User();
+    private final UserRepo repo;
+
+    @Autowired
+    public UserServiceImpl(UserRepo repo){
+        this.repo = repo;
+    }
 
     @Override
     public void createList(String name) {
-        List<Book> books = new ArrayList<>();
-        user.getLists().add(new BookCollection(books, name));
+        repo.createList(name);
     }
 
     @Override
     public void addBook(String listName, Book book) {
-        for (BookCollection l:
-                user.getLists()) {
-            if (l.getName().equals(listName)){
-                l.getBooks().add(book);
-            }
-        }
+        repo.addBook(listName, book);
     }
 
     @Override
     public void deleteBook(String listName, Book book) {
-        for (BookCollection l:
-                user.getLists()) {
-            if (l.getName().equals(listName)){
-                l.getBooks().remove(book);
-            }
-        }
+        repo.deleteBook(listName, book);
     }
 
     @Override
     public void addNotes(String notes, Book book) {
-        if (user.getNotes().containsKey(book)){
-            user.getNotes().replace(book, notes);
-            return;
-        }
-        user.getNotes().put(book, notes);
+        repo.addNotes(notes, book);
     }
-
 
     @Override
     public Book searchBookByName(String listName, String bookName) {
-        for (BookCollection bookCollection:
-                user.getLists()) {
-            if (bookCollection.getName().equals(listName)){
-                return bookCollection.getBooks().stream()
-                        .filter(t -> t.getTitle().equals(bookName)).toList().get(0);
-            }
-        }
-        return null;
+       return repo.searchBookByName(listName, bookName);
     }
 
     @Override
     public BookCollection searchListByName(String listName) {
-        for (BookCollection b:
-                user.getLists()) {
-            if (b.getName().equals(listName)){return b;}
-        }
-        return null;
+        return repo.searchListByName(listName);
     }
 
     @Override
     public List<Book> groupByAuthor(String author) {
-        return this.books.getBooks().stream()
-                .filter(t -> t.getAuthor().equals(author)).toList();
+        return repo.groupByAuthor(author);
     }
 
     @Override
     public List<Book> groupByGenre(String genre) {
-        return this.books.getBooks().stream()
-                .filter(t -> t.getGenre().equals(genre)).toList();
+        return repo.groupByGenre(genre);
     }
-
-
 }
