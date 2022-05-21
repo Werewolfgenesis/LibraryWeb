@@ -11,17 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Entity
-@Table
+@Setter
+@Table(name = "Users")
 public class User {
 	@Id
 	@Column(name = "Username", nullable = false)
-	private String usernameString;
+	private String username;
 	@Id
 	@Column(name = "Password", nullable = false)
-	private String passwordString;
+	private String password;
 	@Column(name = "Notes", nullable = true)
 	private Map<Book, String> notes;
 	@Column(name = "Lists", nullable = true)
