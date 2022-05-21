@@ -1,33 +1,43 @@
 package books.system.demo.service;
 
+import java.util.List;
+
 import books.system.demo.model.Book;
 import books.system.demo.model.BookCollection;
-
-import java.util.List;
+import books.system.demo.model.User;
 
 public interface UserService {
 
-    //Create a list with the name
-    void createList(String name);
+    // Create user.
+    User createUser(User u);
 
-    //Add a book to a specific list
-    void addBook(String listName, Book book);
+    User findUser(String username);
 
-    //Delete a book from a specific list
-    void deleteBook(String listName, Book book);
+    User updateUser(User u);
 
-    //Add some notes for each book
-    void addNotes(String notes, Book book);
+    void deleteUser(String username);
 
-    //Search for a Book by name in the list
-    Book searchBookByName(String listName, String bookName);
+    // Create a list with the name
+    void createList(String username, String name);
 
-    //Search a list by name
+    // Add a book
+    Book addBook(Book book);
+
+    // Delete a book
+    void deleteBook(Book book);
+
+    // Add some notes for each book
+    void addNotes(Book book);
+
+    // Search for a Book by name in the list
+    Book searchBookByName(String bookName);
+
+    // Search a list by name
     BookCollection searchListByName(String listName);
 
-    //group books by author
+    // group books by author
     List<Book> groupByAuthor(String author);
 
-    //group books by genre
+    // group books by genre
     List<Book> groupByGenre(String genre);
 }

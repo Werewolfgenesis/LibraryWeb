@@ -1,9 +1,10 @@
 package books.system.demo.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -11,6 +12,4 @@ import java.util.List;
 public class BookCollection {
     private List<Book> books;
     private String name;
-
-
 }
