@@ -15,7 +15,7 @@ import books.system.demo.model.User;
 import books.system.demo.service.UserService;
 
 @RestController
-@RequestMapping("library")
+@RequestMapping()
 public class RestControllerHandler {
     // @Autowired
     UserService service;
