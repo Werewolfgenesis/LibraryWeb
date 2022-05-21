@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "TBL_BOOK")
+@Table(name = "Books")
 public class Book {
     @Id
     @Column(name = "ISBN", nullable = false)
