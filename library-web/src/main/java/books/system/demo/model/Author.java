@@ -1,10 +1,16 @@
 package books.system.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
 
 @Data
 @Table(name = "Authors")
@@ -19,11 +25,11 @@ public class Author {
     @Column(name = "LastName")
     private String lastName;
 
-    @OneToMany(mappedBy = "Author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JsonBackReference
     private List<Book> books;
 
-    public Author(String firstName, String lastName) {
+    public Author(final String firstName, final String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
