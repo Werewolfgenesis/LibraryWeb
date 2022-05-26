@@ -5,14 +5,22 @@ import java.util.Map;
 import books.system.demo.model.Book;
 import books.system.demo.model.BookCollection;
 import books.system.demo.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 // @AllArgsConstructor
+@NoArgsConstructor
+@Setter
 public class UserDto {
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
+    @JsonIgnore
     private Map<Book, String> notes;
+    @JsonIgnore
     private BookCollection lists;
 
     /**

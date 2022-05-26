@@ -33,7 +33,7 @@ public class RestControllerHandler {
     }
 
     @SuppressWarnings("javadoc")
-    @PostMapping(path = "users")
+    @PostMapping(path = "users", consumes = {"application/json"})
     void createUser(@RequestBody UserDto newUser) {
         this.service.createUser(newUser.toEntity(newUser));
     }
