@@ -2,13 +2,7 @@ package books.system.demo.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -17,6 +11,7 @@ import lombok.Data;
 @Entity
 public class Author {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "FirstName")
@@ -33,4 +28,6 @@ public class Author {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public Author() {}
 }

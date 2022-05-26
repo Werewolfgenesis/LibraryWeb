@@ -2,16 +2,12 @@ package books.system.demo.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @NoArgsConstructor
@@ -20,6 +16,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "book_collection")
 public class BookCollection {
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "name")
     private String name;
     @OneToMany(targetEntity = Book.class, mappedBy = "ISBN", cascade = CascadeType.ALL)
