@@ -57,16 +57,4 @@ public class BookServiceImpl implements BookService {
 
         bookRepository.deleteById(ISBN);
     }
-
-    @Override
-    public Book toBook(BookDto dto) {
-        Book book = new Book();
-
-        book.setTitle(dto.title);
-        book.setISBN(dto.ISBN);
-        book.setGenre(dto.genre);
-        book.setAuthor(dto.author);
-
-        return book;
-    }
 }

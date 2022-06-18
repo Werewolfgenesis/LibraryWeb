@@ -13,5 +13,4 @@ public interface BookService {
     void addBook(Book book);
     void updateBook(Book book);
     void deleteBook(String ISBN);
-    Book toBook(BookDto dto);
 }

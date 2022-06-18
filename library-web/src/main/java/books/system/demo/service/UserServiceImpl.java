@@ -2,6 +2,7 @@ package books.system.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,8 @@ import books.system.demo.repository.UserRepo;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
-    // @Autowired
+    @Autowired
     private BookRepo bookRepo;
-
-    // @Autowired
-    // public UserServiceImpl(final UserRepo repo, final BookRepo bookRepo) {
-    // this.userRepo = repo;
-    // this.bookRepo = bookRepo;
-    // }
 
     @Override
     public void createList(final String username, final String name) {
@@ -36,23 +31,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Book addBook(final Book book) {
-        return this.bookRepo.save(book);
-    }
-
-    @Override
-    public void deleteBook(final Book book) {
-        this.bookRepo.delete(book);
-    }
-
-    @Override
-    public void addNotes(final Book book) {
-
+    public void addNotes(final String username, final Book book, final String notes) {
+        final User user = this.findUser(username);
+        user.getNotes().put(book, notes);
+        this.userRepo.save(user);
     }
 
     @Override
     public Book searchBookByName(final String bookName) {
-        return null;
+        List<Book> allBooks = new ArrayList<>();
+        this.bookRepo.findAll().forEach(allBooks::add);
+
+        Book found = allBooks
+                .stream()
+                .filter(book -> book.getTitle().equals(bookName))
+                .findAny()
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException("No such book!");
+                });
+        return found;
     }
 
     @Override
@@ -63,14 +60,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Book> groupByAuthor(final String author) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Book> allBooks = new ArrayList<>();
+        this.bookRepo.findAll().forEach(allBooks::add);
+
+        return allBooks
+                .stream()
+                .filter(book -> book.getAuthor().getFirstName().equals(author))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Book> groupByGenre(final String genre) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Book> allBooks = new ArrayList<>();
+        this.bookRepo.findAll().forEach(allBooks::add);
+
+        return allBooks
+                .stream()
+                .filter(book -> book.getGenre().equals(genre))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -80,7 +87,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUser(final String username) {
-        return this.userRepo.findById(username).orElse(null);
+        return this.userRepo.findById(username).orElseThrow(() -> {
+            throw new IllegalArgumentException("No such user!");
+        });
     }
 
     @Override

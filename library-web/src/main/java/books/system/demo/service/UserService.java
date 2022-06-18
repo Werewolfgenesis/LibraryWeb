@@ -20,14 +20,8 @@ public interface UserService {
     // Create a list with the name
     void createList(String username, String name);
 
-    // Add a book
-    Book addBook(Book book);
-
-    // Delete a book
-    void deleteBook(Book book);
-
     // Add some notes for each book
-    void addNotes(Book book);
+    void addNotes(String username, Book book, String notes);
 
     // Search for a Book by name in the list
     Book searchBookByName(String bookName);
