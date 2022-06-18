@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Book} from "../../model/Book";
+import { Book } from "../../model/Book";
+import {ActivatedRoute, Params} from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-view-book',
@@ -7,15 +9,23 @@ import {Book} from "../../model/Book";
   styleUrls: ['./view-book.component.css']
 })
 export class ViewBookComponent implements OnInit {
-  selectedBook?: Book;
+  selectedBook: Book;
+  routeSub: Subscription;
+  isbn: string | null;
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
-  }
+    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+      if (params['isbn']) {
+        this.isbn = params['isbn'];
 
-  onSelect(book: Book): void {
-    this.selectedBook = book;
+        // TODO: uncomment this when u implemented the service, Mitkoo
+        // let books = bookService.getBooks();
+        // this.selectedBook=books.find(book => book.isbn === this.isbn);
+      }
+    });
   }
 }

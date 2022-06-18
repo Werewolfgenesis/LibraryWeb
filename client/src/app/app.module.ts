@@ -15,13 +15,13 @@ import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'books-list', pathMatch: 'full'
+    path: '', redirectTo: 'books', pathMatch: 'full'
   },
   {
-    path: 'books-list', component: BooksListComponent
+    path: 'books', component: BooksListComponent
   },
   {
-    path: 'view-book', component: ViewBookComponent
+    path: 'books/:isbn', component: ViewBookComponent
   }
 ];
 

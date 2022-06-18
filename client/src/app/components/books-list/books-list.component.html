@@ -1,3 +1,8 @@
+<div class="canvas">
+  <h2>Welcome to your Library!</h2>
+  <p>What are you planning to read next?</p>
+</div>
+
 <div class="books-list">
   <table mat-table [dataSource]="books" class="mat-elevation-z8">
 
@@ -39,9 +44,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
-      (click)="clickedBooks.add(row)"
-      [class.demo-row-is-clicked]="clickedBooks.has(row)"
-      *matRowDef="let row; columns: displayedColumns;"
+      [routerLink]="['/books', book.isbn]"
+      [class.demo-book-is-clicked]="clickedBooks.has(book)"
+      *matRowDef="let book; columns: displayedColumns;"
     ></tr>
   </table>
 </div>
