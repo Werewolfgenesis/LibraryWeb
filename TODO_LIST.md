@@ -8,3 +8,7 @@ Login functionality
 
 -----------ADD-MORE-BELOW------------
 
+Client:
+- Add About Us Page
+- Load books not with table but with Images in different categories each one of them that can be clicked
+
