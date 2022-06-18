@@ -23,6 +23,6 @@ export class UserService {
   }
 
   deleteUser(username: string) {
-    return this.http.delete<User>(`${environment.restApi}/users`, username);
+    return this.http.delete<User>(`${environment.restApi}/users/${username}`);
   }
 }
