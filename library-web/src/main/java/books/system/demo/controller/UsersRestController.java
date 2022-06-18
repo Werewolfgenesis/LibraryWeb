@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import books.system.demo.dtos.UserDto;
-import books.system.demo.model.Book;
 import books.system.demo.model.User;
 import books.system.demo.service.UserService;
 
 @RestController
 @RequestMapping(path = "library")
-public class RestControllerHandler {
+public class UsersRestController {
     @Autowired
     private UserService service;
 
