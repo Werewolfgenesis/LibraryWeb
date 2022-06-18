@@ -37,7 +37,5 @@ public class User {
         this.collectionBooks = new BookCollection();
     }
 
-    public UserDto convert() {
-        return new UserDto(this.username, this.password, this.notes, this.collectionBooks);
-    }
+
 }
