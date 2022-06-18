@@ -1,0 +1,9 @@
+<p>view-book works!</p>
+<div *ngIf="selectedBook">
+  <h2>{{selectedBook.title | uppercase}} Details</h2>
+  <p>ISBN: {{selectedBook.isbn}}</p>
+  <p>Author: {{selectedBook.author}}</p>
+  <div>
+    <label for="hero-name">Book Description: {{selectedBook.description}}</label>
+  </div>
+</div>
