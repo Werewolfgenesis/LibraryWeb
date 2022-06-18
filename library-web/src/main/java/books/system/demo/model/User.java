@@ -3,18 +3,11 @@ package books.system.demo.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import books.system.demo.dtos.UserDto;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
@@ -22,6 +15,11 @@ import lombok.Data;
 @Table(name = "Users")
 public class User {
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "Username", nullable = false)
     private String username;
     @Column(name = "Password", nullable = false)

@@ -3,6 +3,9 @@ package books.system.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import books.system.demo.model.Book;
@@ -12,8 +15,9 @@ import books.system.demo.repository.BookRepo;
 import books.system.demo.repository.UserRepo;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    // @Autowired
+    @Autowired
     private UserRepo userRepo;
     // @Autowired
     private BookRepo bookRepo;
@@ -27,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createList(final String username, final String name) {
         final User user = this.findUser(username);
-        user.setCollectionBooks(new BookCollection(new ArrayList<>(), name));
+        user.setCollectionBooks(new BookCollection(name, new ArrayList<>()));
         this.userRepo.save(user);
     }
 
