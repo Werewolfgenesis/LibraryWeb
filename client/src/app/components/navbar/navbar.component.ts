@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this
   }
 
   openDialog(): void {

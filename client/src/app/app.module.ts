@@ -13,6 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { SearchComponent } from './components/search/search.component';
+import { BooksCardListComponent } from "./components/books-card-list/books-card-list.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,9 @@ const routes: Routes = [
   },
   {
     path: 'books', component: BooksListComponent
+  },
+  {
+    path: 'books-cards', component: BooksCardListComponent
   },
   {
     path: 'books/:isbn', component: ViewBookComponent
@@ -31,6 +35,7 @@ const routes: Routes = [
     AppComponent,
     HomePageComponent,
     BooksListComponent,
+    BooksCardListComponent,
     NavbarComponent,
     ViewBookComponent,
     AddBookComponent,
