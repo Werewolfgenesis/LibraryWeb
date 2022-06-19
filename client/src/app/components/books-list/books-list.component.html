@@ -3,11 +3,20 @@
   <p>What are you planning to read next?</p>
 </div>
 
+<mat-card class="example-full-width" appearance="fill">
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (ngModelChange)="searchBooks()"
+    matInput
+    placeholder="Search ...">
+</mat-card>
+
 <div class="books-list">
   <table mat-table [dataSource]="books" class="mat-elevation-z8">
 
     <ng-container matColumnDef="isbn">
-      <th mat-header-cell *matHeaderCellDef> ISBN </th>
+      <th mat-header-cell *matHeaderCellDef> ISBN  </th>
       <td mat-cell *matCellDef="let book"> {{book.isbn}} </td>
     </ng-container>
 

@@ -1,5 +1,7 @@
 table {
   width: 100%;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .canvas {
@@ -17,6 +19,17 @@ table {
 .canvas h2 {
   font-size: 40px;
   padding-top: 10vh;
+}
+
+.mat-card {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.mat-card input {
+  text-align: center;
+  font-size: 20px;
 }
 
 .mat-cell {
