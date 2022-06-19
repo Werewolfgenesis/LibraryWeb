@@ -12,6 +12,7 @@ import { AddBookComponent } from './components/add-book/add-book.component';
 import { HttpClientModule } from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     NavbarComponent,
     ViewBookComponent,
     AddBookComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
