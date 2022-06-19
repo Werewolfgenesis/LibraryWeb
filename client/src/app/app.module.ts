@@ -14,6 +14,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { SearchComponent } from './components/search/search.component';
 import { BooksCardListComponent } from "./components/books-card-list/books-card-list.component";
+import { CanvasComponent } from './components/canvas/canvas.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
     ViewBookComponent,
     AddBookComponent,
     SearchComponent,
+    CanvasComponent,
   ],
   imports: [
     BrowserModule,
