@@ -15,7 +15,6 @@ export class BooksListComponent implements OnInit {
 
   // TODO: think if we can separate this in another component
   searchText: string;
-  previousBooks: string;
 
   @HostListener('input') oninput() {
     this.searchBooks();

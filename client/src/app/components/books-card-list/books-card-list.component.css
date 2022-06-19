@@ -1,0 +1,29 @@
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.content {
+  padding: 16px;
+}
+
+.mat-card {
+  margin: 40px 0px;
+  width: 250px;
+  height: 600px;
+  text-align: center;
+  transition: 0.3s all;
+}
+
+.mat-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+  transition: 0.3s all;
+  cursor: pointer;
+}
+
+.mat-card img {
+  height: 400px;
+}
+
+.mat-card-header {
+  height: 70px;
+}

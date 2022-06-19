@@ -3,12 +3,12 @@
 
   <div class="spacer"></div>
 
-  <mat-button-toggle-group class="toggle-view" value="default">
-    <mat-button-toggle value="default" style="border-right: 1px solid white" routerLink="/books">
+  <mat-button-toggle-group class="toggle-view" [value]="selectedView">
+    <mat-button-toggle (change)="selectView($event.value)" value="table" style="border-right: 1px solid white" routerLink="/books">
       <mat-icon>dns</mat-icon>
     </mat-button-toggle>
 
-    <mat-button-toggle routerLink="/books-cards">
+    <mat-button-toggle (change)="selectView($event.value)" value="list" routerLink="/books-cards">
       <mat-icon>book</mat-icon>
     </mat-button-toggle>
 
