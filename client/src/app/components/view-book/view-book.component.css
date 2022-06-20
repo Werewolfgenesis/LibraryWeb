@@ -1,0 +1,21 @@
+.mat-card {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 500px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.mat-card img {
+  height: 100%;
+  margin-right: 30px;
+}
+
+.mat-card-title span {
+  font-size: 15px;
+}
+
+.mat-card label {
+  max-width: 100px;
+}
