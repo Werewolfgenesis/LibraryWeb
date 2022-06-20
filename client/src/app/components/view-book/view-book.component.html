@@ -1,10 +1,16 @@
-<p>view-book works!</p>
-{{isbn}}
 <div *ngIf="selectedBook">
-  <h2>{{selectedBook.title | uppercase}} Details</h2>
-  <p>ISBN: {{selectedBook.isbn}}</p>
-  <p>Author: {{selectedBook.author}}</p>
-  <div>
-    <label>Book Description: {{selectedBook.description}}</label>
-  </div>
+  <mat-card>
+    <mat-card-title class="meeting-title" style="padding: 5px">
+      {{ selectedBook.title }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <strong>ISBN: </strong>{{ selectedBook.isbn }}</mat-card-subtitle
+    >
+    <mat-card-subtitle>
+      <strong>Author: </strong>{{ selectedBook.author }}</mat-card-subtitle
+    >
+    <mat-card-subtitle>
+      <strong>Genre: </strong>{{ selectedBook.genre }}</mat-card-subtitle
+    >
+  </mat-card>
 </div>
