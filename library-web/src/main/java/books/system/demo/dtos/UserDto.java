@@ -23,21 +23,11 @@ public class UserDto {
     @JsonIgnore
     private BookCollection lists;
 
-    /**
-     * @param username
-     * @param password
-     */
     public UserDto(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    /**
-     * @param username
-     * @param password
-     * @param notes
-     * @param lists
-     */
     public UserDto(String username, String password, Map<Book, String> notes, BookCollection lists) {
         this.username = username;
         this.password = password;
@@ -45,13 +35,5 @@ public class UserDto {
         this.lists = lists;
     }
 
-    public User toEntity(final UserDto userDto) {
-        final User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        user.setNotes(userDto.getNotes());
-        user.setCollectionBooks(userDto.lists);
 
-        return user;
-    }
 }
