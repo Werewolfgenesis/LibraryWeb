@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 ## Technologies used
-
+Used Java Spring for the backend with Hibernate for the persistence layer. For the Front-End we chose Angular framework.
 
 ## Developed By
 

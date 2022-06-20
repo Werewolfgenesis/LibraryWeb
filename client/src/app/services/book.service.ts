@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Book } from '../model/Book';
 
 @Injectable({
@@ -10,19 +10,19 @@ import { Book } from '../model/Book';
 export class BookService {
   constructor(private readonly http: HttpClient) {}
 
-  getBook(isbn: string): Observable<Book> {
+  getUser(isbn: string): Observable<Book> {
     return this.http.get<Book>(`${environment.restApi}/books/${isbn}`);
   }
 
-  createBook(book: Book): Observable<Book> {
-    return this.http.post<Book>(`${environment.restApi}/books`, book);
+  createBook(newBook: Book): Observable<Book> {
+    return this.http.post<Book>(`${environment.restApi}/books`, newBook);
+  }
+
+  updateBook(updatedBook: Book): Observable<Book> {
+    return this.http.put<Book>(`${environment.restApi}/books`, updatedBook);
   }
 
   deleteBook(isbn: string) {
-    this.http.delete<Book>(`${environment.restApi}/books/${isbn}`);
-  }
-
-  updateBook(book: Book): Observable<Book> {
-    return this.http.put<Book>(`${environment.restApi}/books`, book);
+    return this.http.delete<Book>(`${environment.restApi}/books/${isbn}`);
   }
 }
