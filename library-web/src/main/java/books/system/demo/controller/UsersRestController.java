@@ -1,19 +1,13 @@
 package books.system.demo.controller;
 
-import books.system.demo.convertions.Convertions;
+import books.system.demo.convertions.Conversions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import books.system.demo.dtos.UserDto;
-import books.system.demo.model.User;
 import books.system.demo.service.UserService;
 
 @RestController
@@ -23,26 +17,29 @@ public class UsersRestController {
     private UserService service;
 
     @GetMapping(path = "users/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    UserDto getUser(@PathVariable final String username) {
-        final User user = this.service.findUser(username);
-        return Convertions.convertUserToDto(user);
+    @CrossOrigin
+    public ResponseEntity<UserDto> getUser(@PathVariable final String username) {
+        return new ResponseEntity<>(this.service.findUser(username), HttpStatus.OK);
     }
 
 
     @PostMapping(path = "users", consumes = {"application/json"})
-    UserDto createUser(@RequestBody UserDto newUser) {
-        this.service.createUser(newUser.toEntity(newUser));
-        return newUser;
+    @CrossOrigin
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto newUser) {
+        return new ResponseEntity<>(this.service.createUser(Conversions.userToEntity(newUser)),
+                HttpStatus.OK);
     }
 
     @PutMapping(path = "users")
-    UserDto updateUser(@RequestBody UserDto newUser) {
-       final User updated = this.service.updateUser(newUser.toEntity(newUser));
-       return Convertions.convertUserToDto(updated);
+    @CrossOrigin
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto newUser) {
+       return new ResponseEntity<>(this.service.updateUser(Conversions.userToEntity(newUser)),
+               HttpStatus.OK);
     }
 
     @DeleteMapping(path = "users/{username}")
-    void deleteUser(@PathVariable String username) {
+    @CrossOrigin
+    public void deleteUser(@PathVariable String username) {
         this.service.deleteUser(username);
     }
 }
