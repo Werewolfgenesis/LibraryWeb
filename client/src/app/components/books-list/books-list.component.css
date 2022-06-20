@@ -4,23 +4,6 @@ table {
   padding-top: 0;
 }
 
-.canvas {
-  background: url("../../../assets/img/library.jpg") center;
-  width: 100%;
-  height: 25vh;
-  color: white;
-  text-align: center;
-}
-
-.canvas h2, p {
-  animation: 1s ease-out 0s 1 popUp;
-}
-
-.canvas h2 {
-  font-size: 40px;
-  padding-top: 10vh;
-}
-
 .mat-card {
   text-align: center;
   display: block;
@@ -50,14 +33,4 @@ table {
 .mat-row:hover .mat-cell {
   background-color: #3f51b5;
   color: white;
-}
-
-
-@keyframes popUp {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }

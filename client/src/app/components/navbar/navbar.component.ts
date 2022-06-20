@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  selectedView: string;
 
   constructor(public dialog: MatDialog) { }
 
@@ -22,5 +23,9 @@ export class NavbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
+  }
+
+  selectView(view: string) : void {
+    this.selectedView = view;
   }
 }
