@@ -7,13 +7,20 @@
   </div>
 </div>
 
-<mat-card class="mat-elevation-z4">
-  <img src="../../../assets/img/test.jpg" alt="Book">
-  <mat-card-content>
-    <mat-card-title>Eloquent JavaScript, Third Edition <span>{{isbn}}</span></mat-card-title>
-    <p>Author: Marijn Haverbeke</p>
-    <div>
-      <label>Book Description: JavaScript lies at the heart of almost every modern web application, from social apps like Twitter to browser-based game frameworks like Phaser and Babylon. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.</label>
-    </div>
-  </mat-card-content>
-</mat-card>
+<div class="container">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-content fxLayout="row" fxLayoutAlign="space-between start">
+      <img src="../../../assets/img/test.jpg" alt="Book">
+      <div class="text">
+        <mat-card-title>Eloquent JavaScript, Third Edition <span>{{isbn}}</span></mat-card-title>
+        <p>Author: Marijn Haverbeke</p>
+        <label>Book Description: JavaScript lies at the heart of almost every modern web application, from social apps like Twitter to browser-based game frameworks like Phaser and Babylon. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.</label>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+          <button mat-stroked-button color="primary">Edit Book</button>
+          <button mat-stroked-button color="warn">Remove Book</button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
