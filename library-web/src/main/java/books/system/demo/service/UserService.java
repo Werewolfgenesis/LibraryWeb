@@ -2,6 +2,7 @@ package books.system.demo.service;
 
 import java.util.List;
 
+import books.system.demo.dtos.UserDto;
 import books.system.demo.model.Book;
 import books.system.demo.model.BookCollection;
 import books.system.demo.model.User;
@@ -9,11 +10,11 @@ import books.system.demo.model.User;
 public interface UserService {
 
     // Create user.
-    User createUser(User u);
+    UserDto createUser(User u);
 
-    User findUser(String username);
+    UserDto findUser(String username);
 
-    User updateUser(User u);
+    UserDto updateUser(User u);
 
     void deleteUser(String username);
 

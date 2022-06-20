@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import books.system.demo.convertions.Conversions;
+import books.system.demo.dtos.UserDto;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +26,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createList(final String username, final String name) {
-        final User user = this.findUser(username);
+        final User user = this.userRepo.findById(username).orElseThrow(() -> {
+            throw new IllegalArgumentException("No such user");
+        });
         user.setCollectionBooks(new BookCollection(name, new ArrayList<>()));
         this.userRepo.save(user);
     }
 
     @Override
     public void addNotes(final String username, final Book book, final String notes) {
-        final User user = this.findUser(username);
+        final User user = this.userRepo.findById(username).orElseThrow(() -> {
+            throw new IllegalArgumentException("No such user");
+        });
         user.getNotes().put(book, notes);
         this.userRepo.save(user);
     }
@@ -54,7 +59,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BookCollection searchListByName(final String listName) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -81,20 +85,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(final User u) {
-        return this.userRepo.save(u);
+    public UserDto createUser(final User u) {
+        this.userRepo.save(u);
+        return Conversions.convertUserToDto(u);
     }
 
     @Override
-    public User findUser(final String username) {
-        return this.userRepo.findById(username).orElseThrow(() -> {
+    public UserDto findUser(final String username) {
+        User found = this.userRepo.findById(username).orElseThrow(() -> {
             throw new IllegalArgumentException("No such user!");
         });
+        return Conversions.convertUserToDto(found);
     }
 
     @Override
-    public User updateUser(final User u) {
-        return this.userRepo.save(u);
+    public UserDto updateUser(final User u) {
+        this.userRepo.save(u);
+        return Conversions.convertUserToDto(u);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package books.system.demo.service;
 
+import books.system.demo.convertions.Conversions;
 import books.system.demo.dtos.BookDto;
 import books.system.demo.model.Book;
 import books.system.demo.repository.BookRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(Book book) {
+    public BookDto addBook(Book book) {
         boolean bookExists = bookRepository.existsById(book.getISBN());
         if (bookExists) {
             throw new IllegalArgumentException(
@@ -38,15 +38,17 @@ public class BookServiceImpl implements BookService {
         }
 
         bookRepository.save(book);
+        return Conversions.convertBookToDto(book);
     }
 
     @Override
-    public void updateBook(Book book) {
+    public BookDto updateBook(Book book) {
         if (!bookRepository.existsById(book.getISBN())) {
             throw new NoSuchElementException(NOT_FOUND_MESSAGE);
         }
 
         bookRepository.save(book);
+        return Conversions.convertBookToDto(book);
     }
 
     @Override
