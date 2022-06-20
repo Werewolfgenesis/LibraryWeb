@@ -19,13 +19,14 @@ public class Book {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "ISBN", nullable = false)
     private String ISBN;
     @ManyToOne(targetEntity = Author.class)
     @JoinColumn(name = "Author", referencedColumnName = "id")
     private Author author;
+
     @Column(name = "Genre", nullable = true)
     private String genre;
+
     @Column(name = "Title", nullable = false)
     private String title;
 }

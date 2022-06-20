@@ -16,13 +16,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "book_collection")
 public class BookCollection {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "name")
     private String name;
+
     @OneToMany(targetEntity = Book.class, mappedBy = "ISBN", cascade = CascadeType.ALL)
     private List<Book> books;
 }
