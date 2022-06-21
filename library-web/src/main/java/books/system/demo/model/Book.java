@@ -14,15 +14,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "Books")
 public class Book {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
     private String ISBN;
-    @ManyToOne(targetEntity = Author.class)
-    @JoinColumn(name = "Author", referencedColumnName = "id")
-    private Author author;
+
+    @Column(name = "Author", nullable = false)
+    private String author;
 
     @Column(name = "Genre", nullable = true)
     private String genre;

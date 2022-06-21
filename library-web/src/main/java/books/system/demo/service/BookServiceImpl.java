@@ -4,6 +4,7 @@ import books.system.demo.convertions.Conversions;
 import books.system.demo.dtos.BookDto;
 import books.system.demo.model.Book;
 import books.system.demo.repository.BookRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -14,6 +15,7 @@ import java.util.NoSuchElementException;
 public class BookServiceImpl implements BookService {
     private static final String NOT_FOUND_MESSAGE = "Book was not found!";
 
+    @Autowired
     private BookRepo bookRepository;
 
     @Override

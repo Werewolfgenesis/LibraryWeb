@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
         return allBooks
                 .stream()
-                .filter(book -> book.getAuthor().getFirstName().equals(author))
+                .filter(book -> book.getAuthor().equals(author))
                 .collect(Collectors.toList());
     }
 
