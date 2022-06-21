@@ -32,13 +32,4 @@ public class Conversions {
 
         return user;
     }
-
-    public static Book toEntity(BookDto bookDto) {
-        Book book = new Book();
-        book.setTitle(bookDto.getTitle());
-        book.setAuthor(bookDto.getAuthor());
-        book.setGenre(bookDto.getGenre());
-
-        return book;
-    }
 }
