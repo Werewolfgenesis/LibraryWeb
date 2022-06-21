@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { finalize } from 'rxjs';
-import { NewBook } from 'src/app/model/Book';
+import { Book } from 'src/app/model/Book';
 import { BookService } from 'src/app/services/book.service';
 @Component({
   selector: 'app-add-book',
@@ -10,7 +9,7 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class AddBookComponent implements OnInit {
   loading = false;
-  book: NewBook;
+  book: Book;
   constructor(
     private readonly dialogRef: MatDialogRef<AddBookComponent>,
     private readonly bookService: BookService
@@ -25,19 +24,13 @@ export class AddBookComponent implements OnInit {
   //title, author, genre
   addBook(title2: string, author2: string, genre2: string, isbn2: string) {
     this.loading = true;
-    this.book.title = title2;
-    this.book.author = author2;
-    this.book.genre = genre2;
-    this.book.isbn = isbn2;
-    console.log(title2 + ' ' + author2 + +isbn2);
     this.bookService
-      .createBook(this.book)
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-          this.dialogRef.close();
-        })
-      )
+      .createBook({
+        title: title2,
+        author: author2,
+        genre: genre2,
+        isbn: isbn2,
+      })
       .subscribe((response) => {
         console.log(response);
         if (response) {

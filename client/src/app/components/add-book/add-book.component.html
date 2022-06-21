@@ -8,7 +8,7 @@
     <p>
       <mat-form-field appearance="fill">
         <mat-label>Enter book ISBN</mat-label>
-        <input required="true" matInput placeholder="Book ISBN*" #ISBN />
+        <input required="true" matInput placeholder="Book ISBN*" #isbn />
       </mat-form-field>
     </p>
 
@@ -34,7 +34,7 @@
     </p>
 
     <button
-      (click)="addBook(title.value, author.value, genre.value, ISBN.value)"
+      (click)="addBook(title.value, author.value, genre.value, isbn.value)"
       mat-raised-button
       color="primary"
     >
