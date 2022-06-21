@@ -15,7 +15,7 @@ import {FormsModule} from "@angular/forms";
 import { SearchComponent } from './components/search/search.component';
 import { BooksCardListComponent } from "./components/books-card-list/books-card-list.component";
 import { CanvasComponent } from './components/canvas/canvas.component';
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 const routes: Routes = [
   {
