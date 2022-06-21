@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Book} from "../../model/Book";
-// @ts-ignore
-import booksData from '../../../assets/mock-data.json';
+import {finalize} from "rxjs";
+import {BookService} from "../../services/book.service";
 
 @Component({
   selector: 'app-books-card-list',
@@ -13,12 +13,15 @@ export class BooksCardListComponent implements OnInit {
 
   // TODO: think if we can separate this in another component
   searchText: string;
+  loading = false;
 
   @HostListener('input') oninput() {
     this.searchBooks();
   }
 
-  constructor() { }
+  constructor(private readonly bookService: BookService) {
+    this.getAllBooks();
+  }
 
   gridColumns = 3;
 
@@ -27,7 +30,19 @@ export class BooksCardListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.books = booksData;
+  }
+
+  getAllBooks() {
+    this.loading = true;
+    this.bookService
+      .getAllBooks()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((response) => {
+        if (response) {
+          console.log(response);
+          this.books = response;
+        }
+      });
   }
 
   searchBooks(): void {

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -14,16 +14,16 @@ export class BookService {
     return this.http.get<Book>(`${environment.restApi}/books/${isbn}`);
   }
 
-  createBook(newBook: Book): Observable<Book> {
-    return this.http.post<Book>(`${environment.restApi}/books`, newBook);
+  createBook(book: Book): Observable<HttpResponse<Book>> {
+    return this.http.post<Book>(`${environment.restApi}/books`, book, { observe: 'response' });
   }
 
   getAllBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(`${environment.restApi}/books`);
   }
 
-  updateBook(updatedBook: Book): Observable<Book> {
-    return this.http.put<Book>(`${environment.restApi}/books`, updatedBook);
+  updateBook(isbn: string, updatedBook: Book): Observable<Book> {
+    return this.http.put<Book>(`${environment.restApi}/books/${isbn}`, updatedBook);
   }
 
   deleteBook(isbn: string) {

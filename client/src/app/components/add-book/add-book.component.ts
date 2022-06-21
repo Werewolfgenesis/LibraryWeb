@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Book } from 'src/app/model/Book';
 import { BookService } from 'src/app/services/book.service';
+import {finalize, Observable} from "rxjs";
+import {HttpResponse} from "@angular/common/http";
+import {Note} from "../../model/Note";
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -18,24 +21,26 @@ export class AddBookComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    //this.addBook();
     this.dialogRef.close();
   }
-  //title, author, genre
-  addBook(title2: string, author2: string, genre2: string, isbn2: string) {
+
+  protected onSaveSuccess(): void {
+    console.log('success');
+  }
+
+  protected onSaveError(): void {
+    console.log('error');
+  }
+
+  subscribeToSaveResponse(result: Observable<HttpResponse<Book>>): void {
+    result.pipe().subscribe({
+      next: () => this.onSaveSuccess(),
+      error: () => this.onSaveError(),
+    });
+  }
+
+  addBook(isbn: string, title: string, author: string, genre: string, notes: Note[]) {
     this.loading = true;
-    this.bookService
-      .createBook({
-        title: title2,
-        author: author2,
-        genre: genre2,
-        isbn: isbn2,
-      })
-      .subscribe((response) => {
-        console.log(response);
-        if (response) {
-          alert('Book successfully created: ' + response.title);
-        }
-      });
+    this.subscribeToSaveResponse(this.bookService.createBook({isbn, title, author, genre, notes}));
   }
 }

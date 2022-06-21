@@ -1,29 +1,56 @@
-.mat-card {
+.container {
   display: flex;
   align-content: center;
   justify-content: center;
-  height: 100%;
-  width: 50%;
-  margin: 0 auto;
+  height: 60vh;
+  margin: 30px auto;
 }
 
-.mat-card img {
+img {
   height: 100%;
-  margin-right: 30px;
+  margin: 0 30px;
 }
 
-.mat-card .text {
+.container .text {
   height: 100%;
+  padding-right: 30px;
 }
 
-.mat-card-title span {
+.container .text p {
+  font-size: 18px;
+}
+
+.h2 span {
   font-size: 15px;
 }
 
-.mat-card label {
+.container label {
   max-width: 100px;
 }
 
-.mat-card .buttons {
+.container .buttons {
   margin-top: 30px;
+}
+
+.container .notes {
+  margin-top: 30px;
+}
+
+.container .notes h2 {
+
+  border-bottom: 2px solid #3f51b5;
+}
+
+.container .notes .note {
+  margin: 15px 0;
+}
+
+.container button {
+  margin-top: 30px;
+}
+
+@media (max-width: 1000px) {
+  .container img {
+    width: 50%;
+  }
 }
