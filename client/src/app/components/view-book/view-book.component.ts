@@ -1,31 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from "../../model/Book";
-import {ActivatedRoute, Params} from "@angular/router";
-import { Subscription } from "rxjs";
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BookService } from 'src/app/services/book.service';
+import { Book } from '../../model/Book';
 
 @Component({
   selector: 'app-view-book',
   templateUrl: './view-book.component.html',
-  styleUrls: ['./view-book.component.css']
+  styleUrls: ['./view-book.component.css'],
 })
-export class ViewBookComponent implements OnInit {
+export class ViewBookComponent {
   selectedBook: Book;
   routeSub: Subscription;
-  isbn: string | null;
+  isbn = '';
+  bookAuthorName = '';
 
-  constructor(private activatedRoute: ActivatedRoute) {
-
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private readonly bookService: BookService
+  ) {
+    this.isbn = this.activatedRoute.snapshot.paramMap.get('isbn') || '';
+    this.getBook(this.isbn);
   }
 
-  ngOnInit(): void {
-    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['isbn']) {
-        this.isbn = params['isbn'];
-
-        // TODO: uncomment this when u implemented the service, Mitkoo
-        // let books = bookService.getBooks();
-        // this.selectedBook=books.find(book => book.isbn === this.isbn);
+  getBook(isbn: string) {
+    this.bookService.getBook(isbn).subscribe((response) => {
+      if (response) {
+        this.selectedBook = response;
+        console.log(this.selectedBook.author);
       }
     });
+  }
+
+  deleteBook() {
+    this.bookService.deleteBook(this.selectedBook.isbn);
   }
 }
