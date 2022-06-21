@@ -6,6 +6,7 @@ import books.system.demo.model.Book;
 import books.system.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("library/books")
+@RequestMapping("/library/books")
 public class BooksRestController {
     @Autowired
     private BookService bookService;
@@ -29,7 +30,8 @@ public class BooksRestController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @PostMapping(consumes = {"application/json"})
+    //@PostMapping(consumes = {"application/json; charset=utf8"})
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
     public ResponseEntity<BookDto> createBook(@RequestBody BookDto newBook)
             throws IllegalArgumentException{
