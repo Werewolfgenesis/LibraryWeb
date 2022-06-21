@@ -10,14 +10,7 @@ import { Book } from '../../model/Book';
 })
 export class BooksListComponent implements OnInit {
   books: Book[];
-  displayedColumns: string[] = [
-    'isbn',
-    'title',
-    'author',
-    'published',
-    'pages',
-    'description',
-  ];
+  displayedColumns: string[] = ['isbn', 'title', 'author'];
   clickedBooks = new Set<Book>();
 
   // TODO: think if we can separate this in another component
@@ -29,7 +22,9 @@ export class BooksListComponent implements OnInit {
     this.searchBooks();
   }
 
-  constructor(private readonly bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {
+    this.getAllBooks();
+  }
 
   ngOnInit(): void {
     this.getAllBooks();
@@ -55,10 +50,7 @@ export class BooksListComponent implements OnInit {
       return (
         book.isbn.toLowerCase().match(this.searchText.toLowerCase()) ||
         book.title.toLowerCase().match(this.searchText.toLowerCase()) ||
-        book.author.firstName
-          .toLowerCase()
-          .match(this.searchText.toLowerCase()) ||
-        book.author.lastName.toLowerCase().match(this.searchText.toLowerCase())
+        book.author.toLowerCase().match(this.searchText.toLowerCase())
       );
     });
   }
