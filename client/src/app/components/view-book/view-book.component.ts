@@ -32,7 +32,11 @@ export class ViewBookComponent {
     });
   }
 
+  updateBook() {
+    this.bookService.updateBook(this.selectedBook);
+  }
+
   deleteBook() {
-    this.bookService.deleteBook(this.selectedBook.isbn);
+    this.bookService.deleteBook(this.selectedBook.isbn).subscribe();
   }
 }
