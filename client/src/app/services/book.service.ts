@@ -27,6 +27,6 @@ export class BookService {
   }
 
   deleteBook(isbn: string) {
-    return this.http.delete<Book>(`${environment.restApi}/books/${isbn}`);
+    return this.http.delete(`${environment.restApi}/books/${isbn}`);
   }
 }
