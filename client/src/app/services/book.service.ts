@@ -14,16 +14,19 @@ export class BookService {
     return this.http.get<Book>(`${environment.restApi}/books/${isbn}`);
   }
 
-  createBook(newBook: Book): Observable<Book> {
-    return this.http.post<Book>(`${environment.restApi}/books`, newBook);
+  createBook(book: Book): Observable<Book> {
+    return this.http.post<Book>(`${environment.restApi}/books`, book);
   }
 
   getAllBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(`${environment.restApi}/books`);
   }
 
-  updateBook(updatedBook: Book): Observable<Book> {
-    return this.http.put<Book>(`${environment.restApi}/books`, updatedBook);
+  updateBook(isbn: string, updatedBook: Book): Observable<Book> {
+    return this.http.put<Book>(
+      `${environment.restApi}/books/${isbn}`,
+      updatedBook
+    );
   }
 
   deleteBook(isbn: string) {

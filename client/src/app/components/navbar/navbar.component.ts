@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.selectedView = localStorage.getItem('view') || 'table';
   }
 
   openDialog(): void {
@@ -27,5 +28,6 @@ export class NavbarComponent implements OnInit {
 
   selectView(view: string) : void {
     this.selectedView = view;
+    localStorage.setItem('view', view);
   }
 }

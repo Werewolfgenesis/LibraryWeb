@@ -1,0 +1,31 @@
+<div class="add-book">
+  <h2>Add Note for {{data.isbn}} 📝</h2>
+  <span class="description"
+  >Want to write something down? Add a note to your book.</span
+  >
+
+  <form #addNoteForm="ngForm" novalidate>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter title</mat-label>
+        <input required="true" matInput placeholder="Note Title*" #title />
+      </mat-form-field>
+    </p>
+
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter content</mat-label>
+        <input required="true" matInput placeholder="Note Content*" #content />
+      </mat-form-field>
+    </p>
+
+    <button
+      (click)="addNote(content.value)"
+      mat-raised-button
+      color="primary"
+    >
+      Submit
+    </button>
+  </form>
+</div>

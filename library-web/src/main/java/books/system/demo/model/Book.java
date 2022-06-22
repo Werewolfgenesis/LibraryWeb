@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -24,4 +26,7 @@ public class Book {
 
     @Column(name = "Title", nullable = false)
     private String title;
+
+    @OneToMany(targetEntity = Note.class, mappedBy = "ISBN", cascade = CascadeType.ALL)
+    private List<Note> notes;
 }
