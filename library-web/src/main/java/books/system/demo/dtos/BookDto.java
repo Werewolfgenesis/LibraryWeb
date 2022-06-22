@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +23,6 @@ public class BookDto {
 
     @NotEmpty(message = "Author must not be empty")
     public String author;
+
+    public List<NoteDto> notes;
 }
