@@ -10,7 +10,7 @@ import { Book } from '../../model/Book';
 })
 export class BooksListComponent implements OnInit {
   books: Book[];
-  displayedColumns: string[] = ['isbn', 'title', 'author'];
+  displayedColumns: string[] = ['isbn', 'title', 'author', 'genre'];
   clickedBooks = new Set<Book>();
 
   // TODO: think if we can separate this in another component
