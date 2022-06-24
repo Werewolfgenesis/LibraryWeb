@@ -25,14 +25,14 @@ public interface UserService {
     void addNotes(String username, Book book, String notes);
 
     // Search for a Book by name in the list
-    Book searchBookByName(String bookName);
+    Book searchBookByName(String username,String bookName);
 
     // Search a list by name
     BookCollection searchListByName(String listName);
 
     // group books by author
-    List<Book> groupByAuthor(String author);
+    List<Book> groupByAuthor(String username,String author);
 
     // group books by genre
-    List<Book> groupByGenre(String genre);
+    List<Book> groupByGenre(String username,String genre);
 }

@@ -41,9 +41,8 @@ public class UserServiceImpl implements UserService {
         user.getNotes().put(book, notes);
         this.userRepo.save(user);
     }
-
     @Override
-    public Book searchBookByName(final String bookName) {
+    public Book searchBookByName(String username,final String bookName) {
         List<Book> allBooks = new ArrayList<>();
         this.bookRepo.findAll().forEach(allBooks::add);
 
@@ -63,22 +62,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Book> groupByAuthor(final String author) {
-        List<Book> allBooks = new ArrayList<>();
-        this.bookRepo.findAll().forEach(allBooks::add);
+    public List<Book> groupByAuthor(String username,final String author) {
+        User found = Conversions.userToEntity(findUser(username));
 
-        return allBooks
+        return found.getCollectionBooks().getBooks()
                 .stream()
                 .filter(book -> book.getAuthor().equals(author))
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Book> groupByGenre(final String genre) {
-        List<Book> allBooks = new ArrayList<>();
-        this.bookRepo.findAll().forEach(allBooks::add);
 
-        return allBooks
+
+    @Override
+    public List<Book> groupByGenre(final String username,final String genre) {
+        User found = Conversions.userToEntity(findUser(username));
+
+        return found.getCollectionBooks().getBooks()
                 .stream()
                 .filter(book -> book.getGenre().equals(genre))
                 .collect(Collectors.toList());
