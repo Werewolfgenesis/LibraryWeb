@@ -1,4 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { finalize } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
@@ -9,7 +12,7 @@ import { Book } from '../../model/Book';
   styleUrls: ['./books-list.component.css'],
 })
 export class BooksListComponent implements OnInit {
-  books: Book[];
+  books: Book[] = [];
   displayedColumns: string[] = ['isbn', 'title', 'author', 'genre'];
   clickedBooks = new Set<Book>();
 
@@ -22,12 +25,23 @@ export class BooksListComponent implements OnInit {
     this.searchBooks();
   }
 
+  dataSource: MatTableDataSource<Book> = new MatTableDataSource(this.books);
+  @ViewChild(MatSort, { static: false }) set content(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private readonly bookService: BookService) {
     this.getAllBooks();
   }
 
   ngOnInit(): void {
     this.getAllBooks();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   getAllBooks() {
@@ -39,6 +53,7 @@ export class BooksListComponent implements OnInit {
         if (response) {
           console.log(response);
           this.books = response;
+          this.dataSource.data = this.books;
         }
       });
   }
