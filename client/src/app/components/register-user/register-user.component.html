@@ -1,0 +1,39 @@
+<h2>Add a Profile</h2>
+<span class="description">Make a profile in our library system!</span>
+
+<form #addUserForm="ngForm" novalidate>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter username</mat-label>
+      <input
+        required="true"
+        matInput
+        placeholder="Desired username*"
+        #username
+      />
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter password</mat-label>
+      <input
+        required="true"
+        type="password"
+        matInput
+        [formControl]="passwordFormControl"
+        placeholder="Desired password*"
+        #password
+      />
+    </mat-form-field>
+  </p>
+
+  <button
+    (click)="registerUser(username.value, password.value)"
+    mat-raised-button
+    color="primary"
+    routerLink="/books"
+  >
+    Submit
+  </button>
+</form>
