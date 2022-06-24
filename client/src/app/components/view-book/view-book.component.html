@@ -1,3 +1,6 @@
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngIf="selectedBook">
   <mat-card>
     <mat-card-title class="meeting-title" style="padding: 5px">
@@ -15,42 +18,43 @@
   </mat-card>
 </div>
 
-<div class="container" fxLayout="row" >
-      <img src="../../../assets/img/test.jpg" alt="Book" />
+<div class="container" fxLayout="row">
+  <img src="../../../assets/img/test.jpg" alt="Book" />
 
-      <div class="text">
-        <h2>Eloquent JavaScript, Third Edition
-          <span>{{ isbn }}</span></h2>
-        <p>Author: Marijn Haverbeke</p>
-        <p>
-          Description: JavaScript lies at the heart of almost every modern
-          web application, from social apps like Twitter to browser-based game
-          frameworks like Phaser and Babylon. Though simple for beginners to
-          pick up and play with, JavaScript is a flexible, complex language that
-          you can use to build full-scale applications.
-        </p>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="space-between center"
-          class="buttons"
-        >
-          <button mat-stroked-button color="primary">Edit Book</button>
-          <button
-            (click)="this.deleteBook()"
-            routerLink="/books"
-            mat-stroked-button
-            color="warn"
-          >
-            Remove Book
-          </button>
-        </div>
+  <div class="text">
+    <h2>
+      Eloquent JavaScript, Third Edition <span>{{ isbn }}</span>
+    </h2>
+    <p>Author: Marijn Haverbeke</p>
+    <p>
+      Description: JavaScript lies at the heart of almost every modern web
+      application, from social apps like Twitter to browser-based game
+      frameworks like Phaser and Babylon. Though simple for beginners to pick up
+      and play with, JavaScript is a flexible, complex language that you can use
+      to build full-scale applications.
+    </p>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+      <button mat-stroked-button color="primary">Edit Book</button>
+      <button
+        (click)="this.deleteBook()"
+        routerLink="/books"
+        mat-stroked-button
+        color="warn"
+      >
+        Remove Book
+      </button>
+    </div>
 
-        <div fxLayout="column" class="notes">
-          <h2>Notes:</h2>
+    <div fxLayout="column" class="notes">
+      <h2>Notes:</h2>
 
-          <p class="note" *ngFor="let note of notes">
-          <mat-card> {{ note.content }} </mat-card>
-        </div>
-        <button mat-raised-button color="primary" (click)="openDialog()"> Add Note</button>
-      </div>
+      <p class="note" *ngFor="let note of notes">
+        <mat-card> {{ note.content }} </mat-card>
+      </p>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      Add Note
+    </button>
+  </div>
 </div>

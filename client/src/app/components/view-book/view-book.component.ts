@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
 import { Note } from '../../model/Note';
@@ -19,6 +19,7 @@ export class ViewBookComponent {
   bookAuthorName = '';
   contentModel: String;
   notes: Note[];
+  loading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,12 +39,20 @@ export class ViewBookComponent {
   }
 
   getBook(isbn: string) {
-    this.bookService.getBook(isbn).subscribe((response) => {
-      if (response) {
-        this.selectedBook = response;
-        console.log(this.selectedBook.author);
-      }
-    });
+    this.loading = true;
+    this.bookService
+      .getBook(isbn)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe((response) => {
+        if (response) {
+          this.selectedBook = response;
+          console.log(this.selectedBook.author);
+        }
+      });
   }
 
   deleteBook() {
