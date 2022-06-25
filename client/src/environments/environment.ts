@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  restApi: 'http://localhost:8080/library',
+  restApi: 'http://localhost:8096/library',
 };
 
 /*
