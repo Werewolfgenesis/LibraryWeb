@@ -41,7 +41,6 @@ img {
 }
 
 .container .notes h2 {
-
   border-bottom: 2px solid #3f51b5;
 }
 
@@ -59,7 +58,6 @@ img {
 
 .container button {
   margin-top: 30px;
-  margin-bottom: -10px;
 }
 
 .container .mat-form-field {
@@ -77,5 +75,59 @@ img {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media (max-height: 850px) {
+  .container .text p {
+    font-size: 16px;
+  }
+
+  .h2 span {
+    font-size: 14px;
+  }
+
+  .container label {
+    max-width: 100px;
+  }
+
+  .container .buttons {
+    margin-top: 10px;
+    border-top: 2px solid #3f51b5;
+  }
+
+  .container .notes {
+    max-height: 120px;
+    display: block;
+    overflow-y: scroll;
+  }
+
+  .container .notes h2 {
+    border-bottom: 2px solid #3f51b5;
+  }
+
+  .container .notes .note {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  .container .notes .note .mat-icon {
+    color: #f44336;
+    font-size: 20px;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .container button {
+    margin-top: 30px;
+  }
+
+  .container .mat-form-field {
+    width: 50%;
+    font-size: 14px;
+  }
+
+  .container .addNoteBtn {
+    margin-left: 10px;
   }
 }
