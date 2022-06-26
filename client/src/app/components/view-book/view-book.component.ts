@@ -17,8 +17,8 @@ export class ViewBookComponent {
   routeSub: Subscription;
   isbn = '';
   bookAuthorName = '';
-  contentModel: String;
-  notes: Note[];
+  notes: string[];
+  newNote: string;
   loading = false;
 
   constructor(
@@ -29,13 +29,9 @@ export class ViewBookComponent {
     this.isbn = this.activatedRoute.snapshot.paramMap.get('isbn') || '';
     this.getBook(this.isbn);
 
-    this.contentModel = '';
+    const defaultNote: string = 'This is a test default note';
 
-    const defaultNote: Note = {
-      content: 'This is a content which is bla bla sample',
-    };
-
-    this.notes = [defaultNote, defaultNote, defaultNote];
+    this.notes = [defaultNote];
   }
 
   getBook(isbn: string) {
@@ -59,14 +55,12 @@ export class ViewBookComponent {
     this.bookService.deleteBook(this.selectedBook.isbn).subscribe();
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddNoteComponent, {
-      data: { isbn: this.selectedBook.isbn },
-      width: '400px',
-    });
+  addNote() {
+    if (this.newNote)
+      this.notes.push(this.newNote);
+  }
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
+  removeNote(note: string) {
+    this.notes.splice(this.notes.indexOf(note), 1);
   }
 }
