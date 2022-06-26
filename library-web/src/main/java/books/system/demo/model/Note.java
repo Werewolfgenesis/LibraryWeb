@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @AllArgsConstructor
@@ -15,7 +13,9 @@ import javax.persistence.Table;
 @Table(name = "Notes")
 public class Note {
     @Id
-    private String ISBN;
+    private String note;
 
-    private String content;
+    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ISBN")
+    private String ISBN;
 }
