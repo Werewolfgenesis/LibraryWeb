@@ -1,8 +1,8 @@
 <div class="page">
   <mat-card class="content">
     <span class="books">📚📚📚</span>
-    <h2>Library Registration</h2>
-    <span class="description">Hello there - make a profile in our library system!</span>
+    <h2>Library Login</h2>
+    <span class="description">Log into our library system!</span>
 
     <form #addUserForm="ngForm" novalidate>
       <p>
@@ -31,30 +31,16 @@
         </mat-form-field>
       </p>
 
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Confirm password</mat-label>
-          <input
-            required="true"
-            type="password"
-            matInput
-            [formControl]="passwordFormControl"
-            placeholder="Desired password*"
-            #passwordConfirm
-          />
-        </mat-form-field>
-      </p>
-
       <button
-        (click)="registerUser(username.value, password.value, passwordConfirm.value)"
+        (click)="loginUser(username.value, password.value)"
         mat-raised-button
         color="primary"
         routerLink="/books"
       >
-        Register
+        Login
       </button>
 
-      <p class="already">Already have a profile? <a routerLink="/login">Login here</a></p>
+      <p class="already">You don't have a profile? <a routerLink="/register">Register here</a></p>
     </form>
   </mat-card>
 </div>

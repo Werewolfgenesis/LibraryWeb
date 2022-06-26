@@ -11,12 +11,14 @@ import { ViewBookComponent } from './components/view-book/view-book.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { HttpClientModule } from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SearchComponent } from './components/search/search.component';
 import { BooksCardListComponent } from "./components/books-card-list/books-card-list.component";
 import { CanvasComponent } from './components/canvas/canvas.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AddNoteComponent } from './components/add-note/add-note.component';
+import { RegisterUserComponent } from "./components/register-user/register-user.component";
+import { LoginUserComponent } from './components/login-user/login-user.component';
 
 const routes: Routes = [
   {
@@ -30,7 +32,13 @@ const routes: Routes = [
   },
   {
     path: 'books/:isbn', component: ViewBookComponent
-  }
+  },
+  {
+    path: 'register', component: RegisterUserComponent
+  },
+  {
+    path: 'login', component: LoginUserComponent
+  },
 ];
 
 @NgModule({
@@ -45,6 +53,8 @@ const routes: Routes = [
     SearchComponent,
     CanvasComponent,
     AddNoteComponent,
+    RegisterUserComponent,
+    LoginUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +64,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
   ],
   exports: [
     RouterModule
