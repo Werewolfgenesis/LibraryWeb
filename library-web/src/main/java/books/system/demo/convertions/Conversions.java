@@ -1,8 +1,10 @@
 package books.system.demo.convertions;
 
 import books.system.demo.dtos.BookDto;
+import books.system.demo.dtos.NoteDto;
 import books.system.demo.dtos.UserDto;
 import books.system.demo.model.Book;
+import books.system.demo.model.Note;
 import books.system.demo.model.User;
 import lombok.experimental.UtilityClass;
 
@@ -21,6 +23,14 @@ public class Conversions {
 
     public static Book convertDtoToBook(BookDto bookDto){
         return new Book(bookDto.getISBN(), bookDto.getAuthor(), bookDto.getGenre(),bookDto.getTitle(), null);
+    }
+
+    public static NoteDto convertNoteToDto(Note note){
+        return new NoteDto(note.getNote(), note.getBook());
+    }
+
+    public static Note convertDtoToNote(NoteDto noteDto){
+        return new Note(noteDto.getNote(), noteDto.getBook());
     }
 
     public static User userToEntity(final UserDto userDto) {
