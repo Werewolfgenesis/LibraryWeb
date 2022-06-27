@@ -6,34 +6,25 @@ import books.system.demo.model.Book;
 import books.system.demo.model.BookCollection;
 import books.system.demo.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-// @AllArgsConstructor
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
-@Setter
 public class UserDto {
-    private String username;
-    private String password;
+    @NotNull
+    @NotEmpty
+    public String username;
+
+    @NotEmpty
+    public String password;
+
     @JsonIgnore
-    private Map<Book, String> notes;
+    public Map<Book, String> notes;
+
     @JsonIgnore
-    private BookCollection lists;
-
-    public UserDto(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public UserDto(String username, String password, Map<Book, String> notes, BookCollection lists) {
-        this.username = username;
-        this.password = password;
-        this.notes = notes;
-        this.lists = lists;
-    }
-
-
+    public BookCollection lists;
 }
