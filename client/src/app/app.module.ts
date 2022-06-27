@@ -12,12 +12,12 @@ import { BooksCardListComponent } from './components/books-card-list/books-card-
 import { BooksListComponent } from './components/books-list/books-list.component';
 import { CanvasComponent } from './components/canvas/canvas.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { LoginUserComponent } from './components/login-user/login-user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { SearchComponent } from './components/search/search.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
 import { MaterialModule } from './material/material.module';
-
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +36,14 @@ const routes: Routes = [
     path: 'books/:isbn',
     component: ViewBookComponent,
   },
+  {
+    path: 'register',
+    component: RegisterUserComponent,
+  },
+  {
+    path: 'login',
+    component: LoginUserComponent,
+  },
 ];
 
 @NgModule({
@@ -51,6 +59,7 @@ const routes: Routes = [
     CanvasComponent,
     AddNoteComponent,
     RegisterUserComponent,
+    LoginUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,15 +22,17 @@ export class RegisterUserComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  registerUser(username: string, password: string) {
-    this.loading = true;
-    this.userService
-      .createUser({
-        username: username,
-        password: password,
-        books: [],
-      })
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe();
+  registerUser(username: string, password: string, passwordConfirm: string) {
+    if (password === passwordConfirm) {
+      this.loading = true;
+      this.userService
+        .createUser({
+          username: username,
+          password: password,
+          books: [],
+        })
+        .pipe(finalize(() => (this.loading = false)))
+        .subscribe();
+    }
   }
 }
