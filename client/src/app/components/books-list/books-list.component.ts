@@ -61,7 +61,7 @@ export class BooksListComponent implements OnInit {
   searchBooks(): void {
     if (!this.searchText) this.ngOnInit();
 
-    this.books = this.books.filter((book) => {
+    this.dataSource.data = this.dataSource.data.filter((book) => {
       return (
         book.isbn.toLowerCase().match(this.searchText.toLowerCase()) ||
         book.title.toLowerCase().match(this.searchText.toLowerCase()) ||
