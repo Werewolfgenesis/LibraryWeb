@@ -26,11 +26,11 @@ public class Conversions {
     }
 
     public static NoteDto convertNoteToDto(Note note){
-        return new NoteDto(note.getNote(), note.getISBN());
+        return new NoteDto(note.getNote(), note.getBook());
     }
 
     public static Note convertDtoToNote(NoteDto noteDto){
-        return new Note(noteDto.getNote(), noteDto.getISBN());
+        return new Note(noteDto.getNote(), noteDto.getBook());
     }
 
     public static User userToEntity(final UserDto userDto) {

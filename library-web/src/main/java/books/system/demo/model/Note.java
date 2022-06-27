@@ -1,14 +1,15 @@
 package books.system.demo.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
 @Table(name = "Notes")
 public class Note {
@@ -17,5 +18,5 @@ public class Note {
 
     @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ISBN")
-    private String ISBN;
+    private Book book;
 }
