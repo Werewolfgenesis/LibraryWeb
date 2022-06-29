@@ -5,7 +5,7 @@ import { finalize, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
 import { Note } from '../../model/Note';
-import { AddNoteComponent } from '../add-note/add-note.component';
+import {NoteService} from "../../services/note.service";
 
 @Component({
   selector: 'app-view-book',
@@ -14,9 +14,7 @@ import { AddNoteComponent } from '../add-note/add-note.component';
 })
 export class ViewBookComponent {
   selectedBook: Book;
-  routeSub: Subscription;
   isbn = '';
-  bookAuthorName = '';
   notes: string[];
   newNote: string;
   loading = false;
@@ -24,14 +22,16 @@ export class ViewBookComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private readonly bookService: BookService,
-    public dialog: MatDialog
+    private readonly noteService: NoteService,
+    public dialog: MatDialog,
   ) {
     this.isbn = this.activatedRoute.snapshot.paramMap.get('isbn') || '';
     this.getBook(this.isbn);
+    this.notes = [];
+  }
 
-    const defaultNote: string = 'This is a test default note';
-
-    this.notes = [defaultNote];
+  ngOnInit(): void {
+    this.getAllNotes();
   }
 
   getBook(isbn: string) {
@@ -55,12 +55,40 @@ export class ViewBookComponent {
     this.bookService.deleteBook(this.selectedBook.isbn).subscribe();
   }
 
+  getAllNotes() {
+    this.loading = true;
+    this.noteService
+      .getAllNotes()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((notesMap) => {
+        if (notesMap) {
+          const notes: string[] = [];
+          for (const [_, note] of Object.entries(notesMap)) {
+            if (note.book.isbn === this.isbn) {
+              notes.push(note.note.valueOf());
+            }
+          }
+          this.notes = notes;
+        }
+      });
+  }
+
   addNote() {
-    if (this.newNote)
-      this.notes.push(this.newNote);
+    const noteDto: Note = {
+      note: this.newNote,
+      book: {
+        isbn: this.isbn,
+        title: this.selectedBook.title,
+        author: this.selectedBook.author,
+        genre: this.selectedBook.genre,
+      }
+    }
+
+    this.noteService.createNote(noteDto);
   }
 
   removeNote(note: string) {
-    this.notes.splice(this.notes.indexOf(note), 1);
+    this.noteService.deleteNote(note);
+    this.getAllNotes();
   }
 }

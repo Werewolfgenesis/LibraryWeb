@@ -1,3 +1,9 @@
 export interface Note {
-  content: String;
+  note: String;
+  book: {
+    isbn: String,
+    title: String,
+    author: String,
+    genre: String,
+  }
 };

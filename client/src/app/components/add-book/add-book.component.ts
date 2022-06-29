@@ -22,16 +22,14 @@ export class AddBookComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addBook(title2: string, author2: string, genre2: string, isbn2: string) {
+  addBook(isbn: string, title: string, author: string, genre: string) {
     this.loading = true;
-    console.log(isbn2);
     this.bookService
       .createBook({
-        title: title2,
-        author: author2,
-        genre: genre2,
-        isbn: isbn2,
-        notes: [],
+        title,
+        author,
+        genre,
+        isbn,
       })
       .pipe(
         finalize(() => {
