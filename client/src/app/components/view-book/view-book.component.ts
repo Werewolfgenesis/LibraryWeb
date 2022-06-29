@@ -84,11 +84,15 @@ export class ViewBookComponent {
       }
     }
 
-    this.noteService.createNote(noteDto);
+    this.loading = true;
+    this.noteService.createNote(noteDto)
+      .pipe(finalize(() => {
+        this.loading = false;
+      }))
+      .subscribe();
   }
 
   removeNote(note: string) {
-    this.noteService.deleteNote(note);
-    this.getAllNotes();
+    this.noteService.deleteNote(note).subscribe();
   }
 }

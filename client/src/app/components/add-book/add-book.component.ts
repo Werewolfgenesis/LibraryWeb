@@ -40,7 +40,7 @@ export class AddBookComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         if (response) {
-          alert('Book successfully created: ' + response.title);
+          alert(`Book successfully created: ${response.title}`);
         }
       });
   }
