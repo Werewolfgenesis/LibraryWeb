@@ -18,11 +18,11 @@ public class Conversions {
     }
 
     public static BookDto convertBookToDto(Book book){
-        return new BookDto(book.getTitle(), book.getISBN(), book.getGenre(),book.getAuthor(), null);
+        return new BookDto(book.getTitle(), book.getISBN(), book.getGenre(),book.getAuthor());
     }
 
     public static Book convertDtoToBook(BookDto bookDto){
-        return new Book(bookDto.getISBN(), bookDto.getAuthor(), bookDto.getGenre(),bookDto.getTitle(), null);
+        return new Book(bookDto.getISBN(), bookDto.getAuthor(), bookDto.getGenre(),bookDto.getTitle());
     }
 
     public static NoteDto convertNoteToDto(Note note){
