@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
-import { Note } from '../../model/Note';
-import { AddNoteComponent } from '../add-note/add-note.component';
 
 @Component({
   selector: 'app-view-book',
@@ -24,7 +22,8 @@ export class ViewBookComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private readonly bookService: BookService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private readonly router: Router
   ) {
     this.isbn = this.activatedRoute.snapshot.paramMap.get('isbn') || '';
     this.getBook(this.isbn);
@@ -52,12 +51,20 @@ export class ViewBookComponent {
   }
 
   deleteBook() {
-    this.bookService.deleteBook(this.selectedBook.isbn).subscribe();
+    this.loading = true;
+    this.bookService
+      .deleteBook(this.selectedBook.isbn)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.router.navigate([`books`]);
+        })
+      )
+      .subscribe();
   }
 
   addNote() {
-    if (this.newNote)
-      this.notes.push(this.newNote);
+    if (this.newNote) this.notes.push(this.newNote);
   }
 
   removeNote(note: string) {
