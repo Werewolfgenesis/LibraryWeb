@@ -49,13 +49,6 @@ public class BookServiceImpl implements BookService {
             throw new NoSuchElementException(NOT_FOUND_MESSAGE);
         }
 
-        Book bookFromDb = getBook(book.getISBN());
-        System.out.println(bookFromDb.toString());
-        bookFromDb.setTitle(book.getTitle());
-        bookFromDb.setAuthor(book.getAuthor());
-        bookFromDb.setGenre(book.getGenre());;
-        bookRepository.save(bookFromDb);
-
         bookRepository.save(book);
         return Conversions.convertBookToDto(book);
     }
