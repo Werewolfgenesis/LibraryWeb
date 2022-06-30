@@ -18,6 +18,7 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import { SearchComponent } from './components/search/search.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
 import { MaterialModule } from './material/material.module';
+import { EditBookComponent } from './components/edit-book/edit-book.component';
 const routes: Routes = [
   {
     path: '',
@@ -60,6 +61,7 @@ const routes: Routes = [
     AddNoteComponent,
     RegisterUserComponent,
     LoginUserComponent,
+    EditBookComponent,
   ],
   imports: [
     BrowserModule,

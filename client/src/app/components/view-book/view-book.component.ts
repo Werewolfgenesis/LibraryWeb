@@ -6,6 +6,7 @@ import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
 import { Note } from '../../model/Note';
 import { AddNoteComponent } from '../add-note/add-note.component';
+import {EditBookComponent} from "../edit-book/edit-book.component";
 
 @Component({
   selector: 'app-view-book',
@@ -32,6 +33,19 @@ export class ViewBookComponent {
     const defaultNote: string = 'This is a test default note';
 
     this.notes = [defaultNote];
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditBookComponent, {
+      width: '400px',
+      data: {
+        isbn: this.isbn,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 
   getBook(isbn: string) {
