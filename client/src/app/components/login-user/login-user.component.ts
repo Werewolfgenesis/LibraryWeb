@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {UserService} from "../../services/user.service";
-import {finalize} from "rxjs";
+import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
+import { ValidatedUser } from 'src/app/model/ValidatedUser';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login-user',
   templateUrl: './login-user.component.html',
-  styleUrls: ['./login-user.component.css']
+  styleUrls: ['./login-user.component.css'],
 })
-export class LoginUserComponent implements OnInit {
-
+export class LoginUserComponent {
   passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -19,19 +20,37 @@ export class LoginUserComponent implements OnInit {
   ]);
 
   loading = false;
-  constructor(private readonly userService: UserService) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private readonly loginService: LoginService,
+    private readonly router: Router
+  ) {}
 
   loginUser(username: string, password: string) {
     this.loading = true;
-    this.userService
-      .createUser({
-        username: username,
-        password: password,
-        books: [],
-      })
+    this.loginService
+      .login(username, password)
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe();
+      .subscribe((response) => {
+        if (response) {
+          this.successfulLogin(response);
+        }
+      });
+  }
+
+  successfulLogin(user: ValidatedUser) {
+    sessionStorage.setItem('token', user.jwt);
+    sessionStorage.setItem('identifier', user.username);
+
+    if (this.redirectMatchesUser(user.username)) {
+      this.router.navigate([sessionStorage.getItem('redirectAfterLogin')]);
+      sessionStorage.removeItem('redirectAfterLogin');
+    }
+  }
+
+  redirectMatchesUser(identifier: string): boolean {
+    return (
+      sessionStorage.getItem('redirectAfterLogin') !== null &&
+      sessionStorage.getItem('redirectAfterLoginIdentifier') === identifier
+    );
   }
 }

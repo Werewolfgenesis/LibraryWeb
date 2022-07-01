@@ -1,0 +1,10 @@
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<ng-template #userPresent>
+  <div *ngIf="user && loading == false">
+    <mat-card class="purple-text ghostwhite helvetica">
+      <mat-card-title> Hello, {{ user.username }} </mat-card-title>
+    </mat-card>
+  </div>
+</ng-template>
