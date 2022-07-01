@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +22,6 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { LoginGuard } from './core/guards/login-guard/login.guard';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { MaterialModule } from './material/material.module';
-import { EditBookComponent } from './components/edit-book/edit-book.component';
 const routes: Routes = [
   {
     path: '',
@@ -67,7 +67,6 @@ const routes: Routes = [
     RegisterUserComponent,
     LoginUserComponent,
     ViewUserComponent,
-    EditBookComponent,
   ],
   imports: [
     BrowserModule,
