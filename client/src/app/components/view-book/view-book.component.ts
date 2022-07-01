@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
+import { EditBookComponent } from "../edit-book/edit-book.component";
 import { Note } from '../../model/Note';
 import {NoteService} from "../../services/note.service";
 
@@ -14,7 +15,9 @@ import {NoteService} from "../../services/note.service";
 })
 export class ViewBookComponent {
   selectedBook: Book;
+  routeSub: Subscription;
   isbn = '';
+  bookAuthorName = '';
   notes: string[];
   newNote: string;
   loading = false;
@@ -22,8 +25,9 @@ export class ViewBookComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private readonly bookService: BookService,
-    private readonly noteService: NoteService,
     public dialog: MatDialog,
+    private readonly router: Router,
+    private readonly noteService: NoteService,
   ) {
     this.isbn = this.activatedRoute.snapshot.paramMap.get('isbn') || '';
     this.getBook(this.isbn);
@@ -32,6 +36,19 @@ export class ViewBookComponent {
 
   ngOnInit(): void {
     this.getAllNotes();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditBookComponent, {
+      width: '400px',
+      data: {
+        isbn: this.isbn,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 
   getBook(isbn: string) {
@@ -52,7 +69,16 @@ export class ViewBookComponent {
   }
 
   deleteBook() {
-    this.bookService.deleteBook(this.selectedBook.isbn).subscribe();
+    this.loading = true;
+    this.bookService
+      .deleteBook(this.selectedBook.isbn)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.router.navigate([`books`]);
+        })
+      )
+      .subscribe();
   }
 
   getAllNotes() {
@@ -74,6 +100,7 @@ export class ViewBookComponent {
   }
 
   addNote() {
+    if (this.newNote) this.notes.push(this.newNote);
     const noteDto: Note = {
       note: this.newNote,
       book: {

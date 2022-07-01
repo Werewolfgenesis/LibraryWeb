@@ -22,9 +22,9 @@ export class BookService {
     return this.http.get<Book[]>(`${environment.restApi}/books`);
   }
 
-  updateBook(isbn: string, updatedBook: Book): Observable<Book> {
+  updateBook(updatedBook: Book): Observable<Book> {
     return this.http.put<Book>(
-      `${environment.restApi}/books/${isbn}`,
+      `${environment.restApi}/books`,
       updatedBook
     );
   }
