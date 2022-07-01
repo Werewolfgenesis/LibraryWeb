@@ -4,6 +4,7 @@ import books.system.demo.dtos.AuthenticatedUserDto;
 import books.system.demo.dtos.UserDto;
 import books.system.demo.security.JsonWebToken;
 import books.system.demo.service.LoginService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.PermitAll;
+
 @RestController()
 @RequestMapping("library/login")
+@PermitAll
 public class LoginRestController {
     @Autowired
     private LoginService service;
