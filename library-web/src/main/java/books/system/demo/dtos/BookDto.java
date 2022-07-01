@@ -23,6 +23,4 @@ public class BookDto {
 
     @NotEmpty(message = "Author must not be empty")
     public String author;
-
-    public List<NoteDto> notes;
 }

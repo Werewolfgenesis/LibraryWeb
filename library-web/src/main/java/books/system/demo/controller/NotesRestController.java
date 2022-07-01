@@ -6,6 +6,7 @@ import books.system.demo.model.Note;
 import books.system.demo.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,10 @@ public class NotesRestController {
     }
 
 
-    @PostMapping(consumes = {"application/json"})
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
-    public ResponseEntity<NoteDto> createNote(@RequestBody NoteDto newNote) {
+    public ResponseEntity<NoteDto> createNote(@RequestBody NoteDto newNote)
+            throws IllegalArgumentException{
         return new ResponseEntity<>(this.service.addNote(Conversions.convertDtoToNote(newNote)),
                 HttpStatus.OK);
     }
@@ -46,6 +48,7 @@ public class NotesRestController {
     @DeleteMapping(path = "/{note}")
     @CrossOrigin
     public void deleteNote(@PathVariable String note) {
+        System.err.println(note);
         this.service.deleteNote(note);
     }
 }

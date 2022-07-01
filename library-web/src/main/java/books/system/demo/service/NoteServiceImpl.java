@@ -2,6 +2,7 @@ package books.system.demo.service;
 
 import books.system.demo.convertions.Conversions;
 import books.system.demo.dtos.NoteDto;
+import books.system.demo.model.Book;
 import books.system.demo.model.Note;
 import books.system.demo.repository.BookRepo;
 import books.system.demo.repository.NoteRepo;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class NoteServiceImpl implements NoteService {

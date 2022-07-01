@@ -25,7 +25,4 @@ public class Book {
 
     @Column(name = "Title", nullable = false)
     private String title;
-
-    @OneToMany(targetEntity = Note.class, mappedBy = "book", cascade = CascadeType.ALL)
-    private List<Note> notes;
 }

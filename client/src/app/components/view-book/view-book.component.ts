@@ -5,6 +5,8 @@ import { finalize, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
 import { EditBookComponent } from "../edit-book/edit-book.component";
+import { Note } from '../../model/Note';
+import {NoteService} from "../../services/note.service";
 
 @Component({
   selector: 'app-view-book',
@@ -24,14 +26,16 @@ export class ViewBookComponent {
     private activatedRoute: ActivatedRoute,
     private readonly bookService: BookService,
     public dialog: MatDialog,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly noteService: NoteService,
   ) {
     this.isbn = this.activatedRoute.snapshot.paramMap.get('isbn') || '';
     this.getBook(this.isbn);
+    this.notes = [];
+  }
 
-    const defaultNote: string = 'This is a test default note';
-
-    this.notes = [defaultNote];
+  ngOnInit(): void {
+    this.getAllNotes();
   }
 
   openDialog(): void {
@@ -77,11 +81,44 @@ export class ViewBookComponent {
       .subscribe();
   }
 
+  getAllNotes() {
+    this.loading = true;
+    this.noteService
+      .getAllNotes()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((notesMap) => {
+        if (notesMap) {
+          const notes: string[] = [];
+          for (const [_, note] of Object.entries(notesMap)) {
+            if (note.book.isbn === this.isbn) {
+              notes.push(note.note.valueOf());
+            }
+          }
+          this.notes = notes;
+        }
+      });
+  }
+
   addNote() {
-    if (this.newNote) this.notes.push(this.newNote);
+    const noteDto: Note = {
+      note: this.newNote,
+      book: {
+        isbn: this.isbn,
+        title: this.selectedBook.title,
+        author: this.selectedBook.author,
+        genre: this.selectedBook.genre,
+      }
+    }
+
+    this.loading = true;
+    this.noteService.createNote(noteDto)
+      .pipe(finalize(() => {
+        this.loading = false;
+      }))
+      .subscribe();
   }
 
   removeNote(note: string) {
-    this.notes.splice(this.notes.indexOf(note), 1);
+    this.noteService.deleteNote(note).subscribe();
   }
 }

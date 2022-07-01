@@ -16,7 +16,7 @@ public class Note {
     @Id
     private String note;
 
-    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name = "ISBN")
     private Book book;
 }
