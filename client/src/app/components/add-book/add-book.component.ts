@@ -31,7 +31,6 @@ export class AddBookComponent implements OnInit {
         author: author2,
         genre: genre2,
         isbn: isbn2,
-        notes: [],
       })
       .pipe(
         finalize(() => {
