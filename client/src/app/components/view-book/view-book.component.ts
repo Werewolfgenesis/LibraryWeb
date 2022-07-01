@@ -100,7 +100,6 @@ export class ViewBookComponent {
   }
 
   addNote() {
-    if (this.newNote) this.notes.push(this.newNote);
     const noteDto: Note = {
       note: this.newNote,
       book: {
