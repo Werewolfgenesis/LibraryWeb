@@ -4,9 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Subscription } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { Book } from '../../model/Book';
-import { Note } from '../../model/Note';
-import { AddNoteComponent } from '../add-note/add-note.component';
-import {EditBookComponent} from "../edit-book/edit-book.component";
+import { EditBookComponent } from "../edit-book/edit-book.component";
 
 @Component({
   selector: 'app-view-book',
