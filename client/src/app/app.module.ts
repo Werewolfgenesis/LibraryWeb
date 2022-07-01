@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { SearchComponent } from './components/search/search.component';
 import { ViewBookComponent } from './components/view-book/view-book.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
+import { LoginGuard } from './core/guards/login-guard/login.guard';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { MaterialModule } from './material/material.module';
 const routes: Routes = [
   {
@@ -39,10 +43,12 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterUserComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'login',
     component: LoginUserComponent,
+    canActivate: [LoginGuard],
   },
 ];
 
@@ -60,6 +66,7 @@ const routes: Routes = [
     AddNoteComponent,
     RegisterUserComponent,
     LoginUserComponent,
+    ViewUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +79,10 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
